@@ -26,7 +26,7 @@ def retrieve_data(conn, args, workers):
         logging.info("Retrieving data remotely 🔗")
         new_data_list = get_remote_files(conn, args, workers)
 
-    if args.file_local or args.read_none:
+    if args.file_local:
         logging.info("Retrieving data Locally 📁")
         new_data_list = get_local_files(conn, args, workers)
 

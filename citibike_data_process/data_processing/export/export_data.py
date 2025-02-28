@@ -22,10 +22,6 @@ S3_FILE_PATH = f'citibike-data/{os.getenv("DUCKDB_FILE")}'
 
 
 def export_data(conn, args):
-    if args.read_none:
-        logging.info(
-            "❌ Not able to Export DB just ran it."
-        )
     if args.make_remote:
         conn.close()
         upload_to_s3(LOCAL_DB_PATH, S3_BUCKET, S3_FILE_PATH)
