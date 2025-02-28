@@ -12,12 +12,26 @@ def update_heatmap(**kwargs):
     temp_table = f'{main_table}_temp'
     new_table = f'ImportedTable'
 
-
     create_new_table(conn, new_table, temp_table)
 
     conn.execute(f""" 
-        INSERT INTO {main_table}
-        SELECT * FROM {temp_table};
+        UPDATE {main_table} AS main
+        SET total_count = main.total_count + temp.total_count
+        FROM {temp_table} AS temp
+        WHERE main.year = temp.year 
+          AND main.month = temp.month 
+          AND main.hour = temp.hour;
+    """)
+
+    conn.execute(f""" 
+        INSERT INTO {main_table} (year, month, hour, total_count)
+        SELECT temp.year, temp.month, temp.hour, temp.total_count
+        FROM {temp_table} AS temp
+        LEFT JOIN {main_table} AS main
+        ON main.year = temp.year 
+           AND main.month = temp.month 
+           AND main.hour = temp.hour
+        WHERE main.year IS NULL;
     """)
 
 def create_new_table(conn, new_table, temp_table_name):
