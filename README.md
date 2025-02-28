@@ -1,32 +1,39 @@
-# Citi Bike Over the Years
+# CitiBike 🚲 Deep Dive
 
-This is the code to build datasets to anaylsis Citibike over the years. To find the results of [this project check out the website displaying this data](https://www.gabrielhn.com/topics/citibike/)
+This projects allows the processing of Citibike yearly datasets into a [duckdb file](https://ghn-public-data.s3.us-east-1.amazonaws.com/citibike-data/CitibikeData.db) that used by [this website](https://www.gabrielhn.com/citibike-deep-dive) to render graphs.
 
-This project uses python to make the data found in data that feeds into the graphs.
+The database holds 4 tables that this code updates based on the latest citibike datasets and then uploads them into the S3.
 
-![website](/citibike_map.png)
+![website](/citibike-deep-dive.gif)
 
 # Installs
 ```
-python3 -m venv venv
-source venv/bin/activate
-pip3 install -r requirements.txt 
+# Create Virtual Env
+uv venv
+
+# Activate Env
+source .venv/bin/activate
+
+# Install Requirements
+uv pip install -r requirements.txt
 ```
 
 Additionally, would need to create [a Mapbox Directions API to use found here](https://docs.mapbox.com/help/glossary/access-token/).
 
+And configure this Mapbox Token, and S3 credentials inside the `.env` file.
 
 # Usage
-Run the script
+Different commands allows for local test, pure remote calls, or a combination of the two.
+
+The more local you run the script the faster the data pipeline gets
 
 ```
-python main.py <command>
+# To read remote citibike S3 files, read the existing duckdb file in S3, and upload the updated duckdb file into S3. Can do 
 
-# To build the datasets locally
-python main.py local
+python -m citibike_data_process --file-remote --read-remote --make-remote
 
-# To build the datasets within your configured AWS S3 bucket
+#  To upload the local citibike files, read the local duckdb file, and main the duckdb file locally.
 
-python main.py s3
+python -m citibike_data_process --file-local --read-local --make-local
 
 ```
