@@ -2,7 +2,7 @@
 
 This projects allows the processing of Citibike yearly datasets into a [duckdb file](https://ghn-public-data.s3.us-east-1.amazonaws.com/citibike-data/CitibikeData.db) that used by [this website](https://www.gabrielhn.com/citibike-deep-dive) to render graphs.
 
-The database holds 4 tables that this code updates based on the latest citibike datasets and then uploads them into the S3.
+The database holds 4 tables that this code updates based on the latest citibike datasets and then uploads them into the S3. And is rendered via [this website page here](https://github.com/gabrielAHN/ghn/tree/main/app/citibike-deep-dive).
 
 ![website](/citibike.gif)
 

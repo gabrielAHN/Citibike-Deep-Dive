@@ -1,0 +1,3 @@
+[submodule "website/deep-dive-analysis"]
+	path = website/deep-dive-analysis
+	url = https://github.com/gabrielAHN/ghn.git
