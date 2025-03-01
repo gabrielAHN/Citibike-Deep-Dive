@@ -4,7 +4,7 @@ This projects allows the processing of Citibike yearly datasets into a [duckdb f
 
 The database holds 4 tables that this code updates based on the latest citibike datasets and then uploads them into the S3.
 
-![website](/citibike-deep-dive.gif)
+![website](/citibike.gif)
 
 # Installs
 ```
